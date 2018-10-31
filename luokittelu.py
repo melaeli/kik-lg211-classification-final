@@ -1,2 +1,2 @@
 print("buorre beaivi máilbmi!")
-print("ipmil atti!"
+print("ipmil atti!"""
