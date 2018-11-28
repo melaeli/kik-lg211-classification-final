@@ -1,0 +1,8 @@
+# Transforming the extentionless files into json using Apache Tika 5/12
+# You should have tika-app-1.19.1.jar file in the same folder when using these commands
+# in command prompt:
+
+C:\Users\Anna\Desktop\KIK-LG211 Building NLP applications\Mainokset>java -jar tika-app-1.19.1.jar -j 5 > 5.json
+
+# This makes a json file from one file but you should learn how to make it to the whole folder (or bash script)
+# (-i inputdir -o outputdir but this did not work) -> see the batch mode in java -jar tika-app-1.19.1.jar --help
