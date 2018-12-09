@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Commercial email finder</title>
+    </head>
+    <body>
+        <h1>Find commercial emails</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Email_Shiny_Icon.svg/256px-Email_Shiny_Icon.svg.png" width="150">
+
+        <form method="POST" autocomplete="on">
+            <input type="text" name="query">
+            <input type="submit" name="submit" value="Search">
+        </form>
+        <table>
+            {% for item in matches %}
+            <tr>
+		<td>{{ item["subject"] }}</td>
+                <td>{{ item["text"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
