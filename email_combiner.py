@@ -6,6 +6,7 @@ import pysolr
 import json
 import os
 import re
+import pprint
 
 # Setting up Solr, note the port number
 solr = pysolr.Solr('http://localhost:8983/solr/email', timeout=10)
@@ -23,6 +24,7 @@ emails = {}
 # json_file in with is and file object, file handle
 for filename in os.listdir(json_postit):
     file_number = re.search('^[0-9]+', filename)
+    file_number = (file_number.group(0))
     json_postit_filename = json_postit + filename
     if os.path.isfile(json_postit_filename) \
             and filename.endswith(".json") \
@@ -33,35 +35,43 @@ for filename in os.listdir(json_postit):
             subject_name = data["subject"]
             # Combining the subject and body values into an email dictionary
             email = {'subject': subject_name}
-           # emails = {file_number: email}
-            emails['subject']=subject_name
-            # Appending the email values to the list
+            emails[file_number] = email
 
-print(emails)
-# Add texty values for existing subject keys
-# Note that there might be a different number of json and txt files in the directory!
-# The json and txt files need to correspond to each other
 
-# email_bodies=[]
+#Adds a default text body to all existing email subject keys
+body_text = "Email body not available."
+for e in emails:
+    email = emails[e]
+    email['text'] = body_text
+    emails[file_number] = email
 
 text_postit = "./text_postit/"
 for filename in os.listdir(text_postit):
     file_number = re.search('^[0-9]+', filename)  # regex
+    file_number = (file_number.group(0))
     text_postit_filename = text_postit + filename
     if os.path.isfile(text_postit_filename) \
             and filename.endswith(".txt") \
             and not filename in text_postit:
         with open(text_postit_filename, "r", encoding="utf-8") as txt_file:
-            body_text = txt_file.read()
-            if file_number in emails:
+            text_body = txt_file.read()
+            if not text_body:
+                body_text = body_text
+                email = emails[file_number]  # testi
+                email['text'] = body_text
+                emails[file_number] = email
+            else:
+                body_text = text_body
                 email = emails[file_number]
                 email['text'] = body_text
-                emails[email] = email
-            else:
-                email_body = {'text': body_text}
-                emails = {file_number: email_body}
+                emails[file_number] = email
 
-print(emails)
+
+pprint.pprint(emails)
+
+print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
+print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
+
 
 # Indexing emails to solr
 solr.add([
