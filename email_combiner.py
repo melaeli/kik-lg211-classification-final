@@ -79,5 +79,6 @@ for file_number in emails:
         json.dump(emails[file_number], f)
 
 # Indexing emails to Solr as json files
+# Need to be tested
 for file_number in emails:
     solr.add(file_number+"email.json")
