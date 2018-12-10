@@ -21,7 +21,7 @@ json_postit = "./json_postit/"
 file_number = ""
 emails = {}
 
-# json_file in with is and file object, file handle
+# Retrieving the email subjects from the json files
 for filename in os.listdir(json_postit):
     file_number = re.search('^[0-9]+', filename)
     file_number = (file_number.group(0))
@@ -38,16 +38,17 @@ for filename in os.listdir(json_postit):
             emails[file_number] = email
 
 
-#Adds a default text body to all existing email subject keys
+# Adding a default text body to all existing email subject keys
 body_text = "Email body not available."
 for e in emails:
     email = emails[e]
     email['text'] = body_text
     emails[file_number] = email
 
+# Retrieving the email bodies from the plain txt files
 text_postit = "./text_postit/"
 for filename in os.listdir(text_postit):
-    file_number = re.search('^[0-9]+', filename)  # regex
+    file_number = re.search('^[0-9]+', filename)
     file_number = (file_number.group(0))
     text_postit_filename = text_postit + filename
     if os.path.isfile(text_postit_filename) \
@@ -57,7 +58,7 @@ for filename in os.listdir(text_postit):
             text_body = txt_file.read()
             if not text_body:
                 body_text = body_text
-                email = emails[file_number]  # testi
+                email = emails[file_number]
                 email['text'] = body_text
                 emails[file_number] = email
             else:
@@ -67,15 +68,16 @@ for filename in os.listdir(text_postit):
                 emails[file_number] = email
 
 
-pprint.pprint(emails)
+#pprint.pprint(emails)
 
-print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
-print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
+#print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
+#print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
 
+# Creating json files of each email dictionary element
+for file_number in emails:
+    with open(file_number+"email.json", "w", encoding="utf-8") as f:
+        json.dump(emails[file_number], f)
 
-# Indexing emails to solr
-solr.add([
-    {
-        "subject": "Testi",
-        "text": "Testi_body"}
-])
+# Indexing emails to Solr as json files
+for file_number in emails:
+    solr.add(file_number+"email.json")
