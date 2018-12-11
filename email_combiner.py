@@ -6,7 +6,7 @@ import pysolr
 import json
 import os
 import re
-import pprint
+#import pprint
 
 # Setting up Solr, note the port number
 solr = pysolr.Solr('http://localhost:8983/solr/email', timeout=10)
@@ -67,21 +67,23 @@ for filename in os.listdir(text_postit):
                 email['text'] = body_text
                 emails[file_number] = email
 
-
 #pprint.pprint(emails["1"])
 
 #print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
 #print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
 
-# Creating json files of each email dictionary element
+# Creating json files of each email dictionary element: unnecessary
 for file_number in emails:
     with open(file_number+"email.json", "w", encoding="utf-8") as f:
         json.dump(emails[file_number], f)
 
 # Indexing emails to Solr as json files
 # Need to be tested, for filename in os.listdir...
-#for file_number in emails:
-    #solr.add(file_number+"email.json")
 
+meilit=[]
 for email in emails:
-    solr.add(email[email]) #Need to be tested, if works, no need to convert into json
+    meili=emails[email]
+    meilit.append(meili)
+
+solr.delete(q='*:*')
+solr.add(meilit)
