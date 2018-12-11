@@ -68,7 +68,7 @@ for filename in os.listdir(text_postit):
                 emails[file_number] = email
 
 
-#pprint.pprint(emails)
+#pprint.pprint(emails["1"])
 
 #print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
 #print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
@@ -79,6 +79,9 @@ for file_number in emails:
         json.dump(emails[file_number], f)
 
 # Indexing emails to Solr as json files
-# Need to be tested
-for file_number in emails:
-    solr.add(file_number+"email.json")
+# Need to be tested, for filename in os.listdir...
+#for file_number in emails:
+    #solr.add(file_number+"email.json")
+
+for email in emails:
+    solr.add(email[email]) #Need to be tested, if works, no need to convert into json
