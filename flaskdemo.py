@@ -35,8 +35,7 @@ def solr(query):
     # Some of the common words like JA and OVAT don't work in the search because Solr stemms them into nothing
     # Search both from the subject and the text including SPACE
     # Searches the words separately without "" which is instructed in the HTML file; juhla NOT talven search works, too
-    url = 'http://localhost:8983/solr/email/select?q=(subject:(' + addplusaakkoset(
-        query) + ')+OR+text:(' + addplusaakkoset(query) + '))&wt=python&start=0' + \
+    url = 'http://localhost:8983/solr/email/select?q=(subject:(' + addplusaakkoset(query) + ')+OR+text:(' + addplusaakkoset(query) + '))&wt=python&start=0' + \
           '&rows=100&fl=text,subject,id&hl=on&hl.fl=text&hl.simple.post=</b>&hl.simple.pre=<b>'
 
     # Trying to add highlighting with Mathias but didn't get it to work (hl.method, hl.fraqsize); leaving the code here anyways for the possible development
