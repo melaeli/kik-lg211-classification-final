@@ -3,21 +3,26 @@
         <meta charset="utf-8">
         <title>Commercial email finder</title>
     </head>
-    <body>
-        <h1>Find commercial emails</h1>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Email_Shiny_Icon.svg/256px-Email_Shiny_Icon.svg.png" width="150">
-
+    <body style="background-color:lavender;" align="center">
+        <h1 style="color:RoyalBlue;"><font face="Trebuchet MS">Find commercial emails</font></h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Email_Shiny_Icon.svg/256px-Email_Shiny_Icon.svg.png" width="115">
+        <br><br>
         <form method="POST" autocomplete="on">
             <input type="text" name="query">
             <input type="submit" name="submit" value="Search">
         </form>
+        <p>Number of documents found: <b>{{n}}</b></p>
+        <p style="color:RoyalBlue;">Please use the apostrophes "" around the multiple words if you want to search emails only for those words together.</p>
+        <p style="color:RoyalBlue;">For example "linnan juhlat". You can also use AND, OR, NOT boolean searches like: linnan AND juhlat.</p>
         <table>
             {% for item in matches %}
             <tr>
-		<td>{{ item["subject"] }}</td>
+                <td style="color:RoyalBlue;">{{ item["count"] }}) </td>
+                <td><b>{{ item["subject"] }}</b></td>
                 <td>{{ item["text"] }}</td>
             </tr>
             {% endfor %}
         </table>
     </body>
+<!-- OBS. HTML <font> Tag. Not Supported in HTML5. is used here as we have no CSS.-->
 </html>
