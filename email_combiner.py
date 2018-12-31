@@ -1,3 +1,4 @@
+# This is the working version of the file 
 # Reading json and text files and parsing the needed information
 # Combining the information into a list of dictionaries
 # Indexing data to Solr
