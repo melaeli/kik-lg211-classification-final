@@ -1,15 +1,5 @@
 # Transforming the extentionless files into json using Apache Tika 5/12
-# You should have tika-app-1.19.1.jar file in the same folder when using these commands
-# in command prompt:
-
-# C:\Users\Anna\Desktop\KIK-LG211 Building NLP applications\Mainokset>java -jar tika-app-1.19.1.jar -j 5 > 5.json
-
-# This makes a json file from one file but you should learn how to make it to the whole folder (or bash script)
-# (-i inputdir -o outputdir but this did not work) -> see the batch mode in java -jar tika-app-1.19.1.jar --help
-
-# I (Elina) have these files now in Ubuntu (Linux in Windows):
-
-# ~/KIK-LG211/Mainokset/Mainoskokokansio/Mainoksia]$ file2json.sh
+# You should have tika-app-1.19.1.jar file in the same folder when using these commands in command prompt
 
 # file2json.sh file includes the script for making json files from all the extentionless files in a folder
 # since the files are named as numbers like 1, 10 etc. The json files are output into a folder json_postit:
@@ -19,4 +9,18 @@ mkdir -p json_postit
 for f in `ls | grep "^[0-9][0-9]*$"`
 do
 java -jar tika-app-1.19.1.jar -j $f > json_postit/$f.json
+done
+
+
+# Transforming the rtf files into txt using Apache Tika 5/12
+# You should have tika-app-1.19.1.jar file in the same folder when using these commands in command prompt
+
+# file2txt.sh file includes the script for making text files from all the rtf files in a folder
+# since the files include rtf. The text files are output into a folder text_postit:
+
+mkdir -p text_postit
+
+for f in `ls | grep "rtf"`
+do
+java -jar tika-app-1.19.1.jar -t $f > text_postit/$f.txt
 done
