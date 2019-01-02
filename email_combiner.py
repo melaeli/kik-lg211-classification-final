@@ -66,7 +66,6 @@ for filename in os.listdir(text_postit):
                 email = emails[file_number]
                 email['text'] = body_text
                 emails[file_number] = email
-                email['file_number'] = file_number
 
 #pprint.pprint(emails["1"])
 
@@ -86,5 +85,5 @@ for email in emails:
     meili=emails[email]
     meilit.append(meili)
 
-#solr.delete(q='*:*')
+solr.delete(q='*:*')
 solr.add(meilit)
