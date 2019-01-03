@@ -72,13 +72,7 @@ for filename in os.listdir(text_postit):
 #print(emails["10"]['subject'] + emails["10"]["text"]) # Test: email body available
 #print(emails["1"]['subject'] + emails["1"]["text"])  # Test: email body not evailable, shows default text body
 
-# Creating json files of each email dictionary element: unnecessary
-for file_number in emails:
-    with open(file_number+"email.json", "w", encoding="utf-8") as f:
-        json.dump(emails[file_number], f)
-
-# Indexing emails to Solr as json files
-# Need to be tested, for filename in os.listdir...
+# Indexing emails to Solr
 
 meilit=[]
 for email in emails:
