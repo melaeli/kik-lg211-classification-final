@@ -1,17 +1,17 @@
 #### Commercial email finder 
 
-This is a group project for the University of Helsinki NLP course.
+This is a group project for the University of Helsinki NLP course KIK-LG211 (2018).
 In our project we created an application where you can search commercial email data indexed into Apache Solr.
-The email data was first converted into a suitable format and indexed into Solr with Python. For our user interface we used Flask web framework to enable searching from Solr through a web brouwser user interface. HTML was used for styling the interface. 
+The email data was first converted into a suitable format and indexed into Solr with Python. For our user interface we used Flask web framework to enable searching from Solr through a web browser user interface. HTML was used for styling the interface. 
 
-Our original plan was to create a project around text classification so that each email would be classified into searchable topics. During the project different ways of incorporating the topic search feature arised but was not carried out. Creating a working application required all our efforts but we found studying and weighing different options for email classification or topic recognition as great practice. As the time for project was rather limited, we consider our successful though equally limited. We may have made some better choices on what we decided to work on and what to exclude but we also think we disregarded the features we needed to have a working application within the time limit.
+Our original plan was to create a project around text classification so that each email would be classified into searchable topics. During the project different ways of incorporating the topic search feature arised but was not carried out. Creating a working application required all our efforts but we found studying and weighing different options for email classification or topic recognition as great practice. As the time for project was rather limited, we consider our application successful though equally limited. We may have made some better choices on what we decided to work on and what to exclude but we also think we disregarded the features we needed to have a working application within the time limit.
 
 
 ### Installation
 
-NOTE: The email files used for the project are excluded from the repository as the contain sensitive information! 
+NOTE: The email files used for the project are excluded from the repository as they contain sensitive information! 
 
-To use the project with your own email files you can create a pst file of your emails and extract them into separate files with Apache Tika. The `readpst` command creates 2 files of a pst email file: an extentionless file and an rtf file (this only includes). These extentionless files you can transform into json and the rtf files into plain text files with Apache Tika. To index your own email into Solr, run **email_combiner.py** with your file path for your emails.
+To use the project with your own email files you can create a pst file of your emails (if working with Outlook emails) and extract them into separate files with Apache Tika. The `readpst -S -o out/ file.pst` command creates 2 files of each email in the pst email file: an extentionless file and an rtf file (which only includes the body of the text). These extentionless files you can transform into json and the rtf files into plain text files with Apache Tika. To index your own email into Solr, run **email_combiner.py** with your file path for your emails.
 
 All other files can be attained by cloning this repository.
 
@@ -28,7 +28,7 @@ $ cd solr-7.5.0
 
 $ bin/solr start -p 8983
 
-If you do not initialize your Solr with example schemas you will need to create your own email core and make make the necessary modifications to other files.
+If you do not initialize your Solr with example schemas you will need to create your own email core and make the necessary modifications to other files.
 
 
 ## Flask 
@@ -38,7 +38,7 @@ To use the application with its browser interface you need to set up and run Fla
 
 ## email_combiner.py
 
-To index your emails into Solr, run email_combiner.py with approriate paths to the folders containing your emails.
+To index your emails into Solr, run email_combiner.py with appropriate paths to the folders containing your emails.
 
 
 ## How to run the program 
@@ -47,7 +47,7 @@ For example on your local Windows computer for Solr and Linux Ubuntu shell for F
 
 1) Start Solr in Windows cmd and go to the Solr folder that you have created
 
-2) Possible needs to set up Java home
+2) Set up Java home with your own path if needed
 
 3) Start Solr (you may need to go to the bin folder and you may have a different command)
 
